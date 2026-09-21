@@ -14,7 +14,6 @@ touching `src/model.py` - the ppm/reusable-quote rules there are easy to get sub
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env   # set KPKUSERNAME / KPKPASSWORD
 streamlit run app.py
 ```
 
@@ -31,28 +30,25 @@ Railway project, reachable internally over Twingate rather than a public URL:
 
 ```bash
 docker build -t symbiotic-quotes .
-docker run -p 8501:8501 -e PORT=8501 -e KPKUSERNAME=... -e KPKPASSWORD=... symbiotic-quotes
+docker run -p 8501:8501 -e PORT=8501 symbiotic-quotes
 ```
 
-On Railway: connect this repo, set `KPKUSERNAME` / `KPKPASSWORD` in the service's Variables (never
-in the repo), and auto-deploy from `main` - engineering handles the Twingate-internal domain. Ask in
-#curation or ping João for the initial Railway hookup.
+The app needs no secrets or environment variables of its own - every source is public and
+unauthenticated, and Twingate is the access control, so there is no in-app login. On Railway:
+connect this repo and auto-deploy from `main` - engineering handles the Twingate-internal domain.
+Ask in #curation or ping João for the initial Railway hookup.
 
 ### Alternative: Streamlit Community Cloud
 
-Works too if you'd rather not wait on the Railway hookup, but it requires the repo to be public and
-Streamlit's GitHub App to be approved for the `kpk-labs` org - the thing that's currently stuck.
-1. Deploy from the Streamlit Cloud dashboard, pointing at `app.py`.
-2. In the app's Secrets (TOML, so values need quotes):
-   ```toml
-   KPKUSERNAME = "..."
-   KPKPASSWORD = "..."
-   ```
+Works too if you'd rather not wait on the Railway hookup: deploy from the Streamlit Cloud dashboard
+pointing at `app.py`, no secrets to configure. Note that it requires the repo to be public and
+Streamlit's GitHub App to be approved for the `kpk-labs` org - the thing that's currently stuck -
+and unlike Railway it puts the board on a public URL with nothing in front of it.
 
 ## Layout
 
 ```
-app.py                 # UI + fetch orchestration, login gate
+app.py                 # UI + fetch orchestration
 src/
   config.py            # addresses, ABIs, logos
   safe.py              # Safe Transaction Service client

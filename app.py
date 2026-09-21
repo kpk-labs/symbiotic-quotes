@@ -1,35 +1,10 @@
-import os
-
 import streamlit as st
-from dotenv import load_dotenv
 
 from src import chain, model, rfq, safe
 from src.config import ADAPTER, LOGOS, SAFE
 from src.util import format_age, get_cached
 
-load_dotenv()
-
-KPKUSERNAME = os.getenv("KPKUSERNAME")
-KPKPASSWORD = os.getenv("KPKPASSWORD")
-
 st.set_page_config(page_title="KPK Symbiotic LL quotes", layout="wide", page_icon="\U0001F4B1")
-
-if "authenticated" not in st.session_state:
-    st.session_state.authenticated = False
-
-if not st.session_state.authenticated:
-    st.title("KPK Symbiotic LL quotes")
-    with st.form("login_form"):
-        input_username = st.text_input("Username")
-        input_password = st.text_input("Password", type="password")
-        submitted = st.form_submit_button("Login")
-        if submitted:
-            if input_username == KPKUSERNAME and input_password == KPKPASSWORD:
-                st.session_state.authenticated = True
-                st.rerun()
-            else:
-                st.error("Invalid username or password.")
-    st.stop()
 
 
 # --- Data sources (60s TTL, last-good-value-on-failure - see src/util.py) ---
