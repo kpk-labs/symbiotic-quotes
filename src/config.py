@@ -56,5 +56,5 @@ LOGOS = {
     "JTRSY": "https://assets.coingecko.com/coins/images/70445/small/JTRSY.png?1762078582",
     "JAAA": "https://assets.coingecko.com/coins/images/70446/small/jaaa.png?1762078666",
     "DEJTRSY": "https://assets.coingecko.com/coins/images/102175872/small/Centrifuge_Token_from_SVG_to_PNG.png?1787820266",
-    "DEJAAA": "https://assets.coingecko.com/coins/images/102172528/small/deJAAA.png?1773764620",
+    "DEJAAA": "https://assets.coingecko.com/coins/images/102175872/small/Centrifuge_Token_from_SVG_to_PNG.png?1787820266",
 }
