@@ -1,3 +1,4 @@
 streamlit>=1.40
 requests>=2.32
 web3>=7.0
+certifi>=2026.10.19  # eMudhra CA compromise, GHSA-6q48-6c7w-9gw2
